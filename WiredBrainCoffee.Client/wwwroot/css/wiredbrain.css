@@ -1,0 +1,150 @@
+body {
+    padding-top: 54px;
+    background-color: #F1EFEE !important;
+    padding-bottom: 0px;
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+#qrCode {
+    margin: 15px;
+}
+
+@media screen and (max-width: 767px) {
+    .carousel-caption {
+        display: none;
+    }
+}
+
+@media (min-width: 992px) {
+    body {
+        padding-top: 56px;
+    }
+}
+
+.carousel-caption {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: white;
+    background: black;
+    text-align: center;
+}
+
+
+.portfolio-item {
+    margin-bottom: 30px;
+}
+
+.card-image {
+    width: 100%;
+    height: 250px;
+}
+
+.card {
+    max-width: 250px;
+    float: left;
+    height: 300px;
+    margin: 10px;
+}
+
+.bg-ground {
+    background-image: url("../images/ground.jpg");
+    background-size: cover;
+}
+
+.bg-bagel {
+    background-image: url("../images/bagel.jpg");
+    background-size: cover;
+    background-position-y: -75px;
+}
+
+.bg-table {
+    background-image: url("../images/table.jpg");
+    background-size: cover;
+    background-position-y: -110px;
+}
+
+.carousel-item {
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.card-title a {
+    color: #353A40;
+}
+
+.portfolio-item img {
+    width: 100%;
+    max-height: 300px;
+}
+
+.field-validation-error {
+    color: red;
+}
+
+.contact-container {
+    min-height: 500px;
+}
+
+/* Menu Items */
+.menu-item {
+    background-color: #fff;
+    display: flex;
+    position: relative;
+    padding: 25px 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.menu-item-info {
+    padding: 0 10px;
+    flex-grow: 2;
+}
+
+.menu-item-actions {
+    display: flex;
+    justify-content: space-between
+}
+
+.menu-item img {
+    width: 150px;
+    display: block;
+}
+
+.current-order-list {
+    margin: 25px 0;
+    padding: 0;
+}
+
+.current-order-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+a, .btn-link {
+    color: #121212;
+}
+
+.order-page {
+    min-height: 750px;
+}
