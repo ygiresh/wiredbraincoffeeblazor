@@ -19,7 +19,7 @@
                     </Items>
                     <Content>
                         <TabPanel Name="coffee">
-                            Content for home.
+                            <p>The coffee will go here.</p>
                         </TabPanel>
                         <TabPanel Name="food">
                             @foreach (var item in MenuItems)
@@ -29,11 +29,11 @@
                                         <img src="@item.ImageFile" />
                                     </div>
                                     <div class="menu-item-info">
-                                        <p class="menu-item-title">@item.Name</p>
+                                        <p class="menu-item-title"><b>@item.Name</b></p>
                                         <p class="menu-item-summary">@item.Summary</p>
                                         <div class="menu-item-actions">
-                                            <span class="menu-item-price">Price: @item.Price.ToString("C")</span>
-                                            <Button @onclick="(e => AddToOrder(item))" Color="Color.Info">Add to Order</Button>
+                                            <span class="menu-item-price"><b>Price: @item.Price.ToString("C")</b></span>
+                                            <Button @onclick="(e => AddToOrder(item))" Color="Color.Light">Add to Order</Button>
                                         </div>
                                     </div>
                                 </div>
