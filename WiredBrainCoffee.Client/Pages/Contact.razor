@@ -5,8 +5,8 @@
     <h2>Contact Us</h2>
     <p>We'd love to hear from you! We try our best to respond within 24 hours.</p>
     <hr />
-    <Row>
-        <Column ColumnSize="ColumnSize.Is8">
+    <div class="row">
+        <div class="col-md-8">
             <div class="contact-form">
                 <EditForm Model="@ContactForm" OnValidSubmit="@HandleValidSubmit">
                     <DataAnnotationsValidator />
@@ -35,8 +35,8 @@
                     <button type="submit" class="btn btn-success">Submit</button>
                 </EditForm>
             </div>
-        </Column>
-        <Column ColumnSize="ColumnSize.Is4">
+        </div>
+        <div class="col-md-4">
             <div>
                 <h3>Keep in Touch</h3>
                 <p>Sign up for our mailing list - no spam, we promise.</p>
@@ -63,8 +63,8 @@
                 </p>
             </div>
             <img style="width: 100%" src="images/placeholder.png" />
-        </Column>
-    </Row>
+        </div>
+    </div>
     @code {
         public WiredBrainCoffee.Models.Contact ContactForm = new WiredBrainCoffee.Models.Contact();
 

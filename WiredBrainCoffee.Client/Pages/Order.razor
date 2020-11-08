@@ -3,38 +3,39 @@
 
 <div class="container">
     <div class="order-page">
-        <Row>
-            <Column ColumnSize="ColumnSize.Is12">
-                <br />
+        <div class="row">
+            <div class="col-md-12">
                 <h2>New Order</h2>
                 <p>Coffee, comfort food, great prices - we have it all.</p>
                 <hr />
-            </Column>
-        </Row>
-        <Row>
-            <Column ColumnSize="ColumnSize.Is8">
-                <Tabs SelectedTab="@selectedTab" SelectedTabChanged="@OnSelectedTabChanged">
-                    <Items>
-                        <Tab Name="coffee">Coffee</Tab>
-                        <Tab Name="food">Food</Tab>
-                    </Items>
-                    <Content>
-                        <TabPanel Name="coffee">
-                            @foreach (var item in CoffeeMenuItems)
-                            {
-                                <MenuListItem MenuItem="item" OnClickCallback="(e => AddExtras(item))" />
-                            }
-                        </TabPanel>
-                        <TabPanel Name="food">
-                            @foreach (var item in FoodMenuItems)
-                            {
-                                <MenuListItem MenuItem="item" OnClickCallback="(e => AddToOrder(item))" />
-                            }
-                        </TabPanel>
-                    </Content>
-                </Tabs>
-            </Column>
-            <Column ColumnSize="ColumnSize.Is4">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="nav nav-tabs nav-fill">
+                    <li class="nav-item">
+                        <a @onclick="ShowCoffee" class="nav-link @(CoffeeHidden ? "":"active")">Coffee</a>
+                    </li>
+                    <li class="nav-item">
+                        <a @onclick="ShowFood" class="nav-link @(FoodHidden ? "":"active")">Food</a>
+                    </li>
+                </ul>
+                <div class="tab-containers">
+                    <div hidden="@CoffeeHidden" class="coffee-tab">
+                        @foreach (var item in CoffeeMenuItems)
+                        {
+                            <MenuListItem MenuItem="item" OnClickCallback="(e => AddExtras(item))" />
+                        }
+                    </div>
+                    <div hidden="@FoodHidden" class="food-tab hide">
+                        @foreach (var item in FoodMenuItems)
+                        {
+                            <MenuListItem MenuItem="item" OnClickCallback="(e => AddToOrder(item))" />
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
                 <div class="order-info">
                     <h3>Your Current Order:</h3>
                     @foreach (var item in CurrentOrder)
@@ -48,17 +49,27 @@
                         <Button Color="Color.Success" class="float-right">Place Order</Button>
                     </div>
                 </div>
-            </Column>
-        </Row>
+            </div>
+        </div>
 
     </div>
 </div>
 @code {
     string selectedTab = "coffee";
 
-    private void OnSelectedTabChanged(string name)
+    private bool CoffeeHidden { get; set; } = false;
+    private bool FoodHidden { get; set; } = true;
+
+    private void ShowCoffee()
     {
-        selectedTab = name;
+        CoffeeHidden = false;
+        FoodHidden = true;
+    }
+
+    private void ShowFood()
+    {
+        CoffeeHidden = true;
+        FoodHidden = false;
     }
 
     [CascadingParameter] public IModalService Modal { get; set; }

@@ -1,7 +1,7 @@
 ﻿@page "/"
 
 
-<header>
+<header class="d-none d-md-block d-lg-block">
     <Carousel @bind-SelectedSlide="@selectedSlide">
         <CarouselSlide Name="1">
             <Image Source="images/banner/banner-bag.png" Text="City Skyline" Display="Display.Block" Style="width: 100%;" />
@@ -15,7 +15,7 @@
     }
 </header>
 <div class="container">
-    <h2 class="my-4">Three options to keep your brain wired.</h2>
+    <h2 class="my-4">Welcome to Wired Brain Coffee.</h2>
     <div class="row">
         <div class="col-md-4 mb-4">
             <div class="card h-100">
@@ -62,7 +62,7 @@
         <div class="col-md-8">
             <div class="mobile-app">
                 <h2>Get the app!</h2>
-                <div class="mobile-content">
+                <div class="mobile-content row">
                     <div class="description">
                         <p>Stay wired on the go with these benefits:</p>
                         <ul>

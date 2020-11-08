@@ -145,6 +145,7 @@ a, .btn-link {
 
 .order-page {
     min-height: 750px;
+    margin: 25px 0;
 }
 
 .contact-form {
@@ -176,8 +177,7 @@ a, .btn-link {
 }
 
 .blazored-modal {
-    min-width: 500px;
-    min-height: 500px;
+    padding: 50px;
 }
 
 .extra-row {
@@ -197,6 +197,10 @@ a, .btn-link {
     padding: 10px 5px;
     text-align: right;
     border-bottom: 1px solid #ccc;
+}
+
+.order-info {
+    margin: 50px 0;
 }
 
 .order-item {
