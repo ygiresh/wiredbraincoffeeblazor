@@ -170,3 +170,46 @@ a, .btn-link {
     cursor: pointer;
     text-align: right;
 }
+.extras-modal {
+    min-width: 500px;
+    min-height: 500px;
+}
+
+.blazored-modal {
+    min-width: 500px;
+    min-height: 500px;
+}
+
+.extra-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-extra {
+    cursor: pointer;
+}
+
+.add-extra:hover {
+    text-decoration: underline;
+}
+
+.order-wrapper {
+    padding: 10px 5px;
+    text-align: right;
+    border-bottom: 1px solid #ccc;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.extras-list li {
+    display: flex;
+    justify-content: space-between;
+}
+
+.place-order {
+    margin: 10px 0;
+}

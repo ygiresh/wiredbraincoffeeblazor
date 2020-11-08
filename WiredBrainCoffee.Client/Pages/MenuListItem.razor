@@ -9,7 +9,7 @@
         <p class="menu-item-summary">@MenuItem.Summary</p>
         <div class="menu-item-actions">
             <span class="menu-item-price"><b>Price: @MenuItem.Price.ToString("C")</b></span>
-            <Button OnClickCallback="(e => AddExtras(item))" Color="Color.Light">Add to Order</Button>
+            <Button @onclick="(() => OnClickCallback.InvokeAsync(MenuItem))" Color="Color.Light">Add to Order</Button>
         </div>
     </div>
 </div>
@@ -19,5 +19,5 @@
     public MenuItem MenuItem { get; set; } = new MenuItem();
 
     [Parameter]
-    public EventCallback<MouseEventArgs> OnClickCallback { get; set; }
+    public EventCallback<MenuItem> OnClickCallback { get; set; }
 }

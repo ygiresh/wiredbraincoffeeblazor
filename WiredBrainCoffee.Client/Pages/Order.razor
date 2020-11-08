@@ -37,25 +37,16 @@
             <Column ColumnSize="ColumnSize.Is4">
                 <div class="order-info">
                     <h3>Your Current Order:</h3>
-                    <ul class="current-order-list">
-                        @foreach (var item in CurrentOrder)
-                        {
-                            <li>
-                                <span>@item.Name</span><span>@item.Price.ToString("C")</span><span class="remove-item" @onclick="(e => RemoveFromOrder(item))">X</span>
-                            </li>
-                            <ul>
-                                @foreach (var addin in item.AddIns)
-                                {
-                                    <li>@addin</li>
-                                }
-                            </ul>
-                        }
-                    </ul>
-                    <hr />
-                    <p class="sub-line"><span>Sales Tax:</span><span>@((OrderTotal * SalesTax).ToString("C"))</span></p>
-                    <p class="sub-line"><span>Your Total:</span><span>@((OrderTotal + (SalesTax * OrderTotal)).ToString("C"))</span></p>
-                    <hr />
-                    <Button Color="Color.Success" class="float-right">Place Order</Button>
+                    @foreach (var item in CurrentOrder)
+                    {
+                        <OrderListItem OrderItem="item" OnClickCallback="(e => RemoveFromOrder(item))" />
+                    }
+                    <div class="place-order">
+                        <p class="sub-line"><span>Sales Tax:</span><span>@((OrderTotal * SalesTax).ToString("C"))</span></p>
+                        <p class="sub-line"><span>Your Total:</span><span>@((OrderTotal + (SalesTax * OrderTotal)).ToString("C"))</span></p>
+                        <hr />
+                        <Button Color="Color.Success" class="float-right">Place Order</Button>
+                    </div>
                 </div>
             </Column>
         </Row>
@@ -74,21 +65,27 @@
 
     async Task AddExtras(MenuItem item)
     {
-        var formModal = Modal.Show<SignUpForm>("Enhance Your Coffee");
+        item.Extras = new Extras();
+        var formModal = Modal.Show<CoffeeExtrasModal>("Enhance Your Coffee");
         var result = await formModal.Result;
 
         if (!result.Cancelled)
         {
-            item.AddIns.AddRange((IEnumerable<string>)result.Data);
+            item.Extras = (Extras)result.Data;
 
             AddToOrder(item);
-            item.AddIns.Clear();
         }
     }
 
     async Task AddToOrder(MenuItem item)
     {
-        CurrentOrder.Add(item);
+        CurrentOrder.Add(new OrderItem()
+        {
+            Name = item.Name,
+            Id = item.Id,
+            Price = item.Price,
+            Extras = item.Extras
+        });
 
         OrderTotal = 0;
         @foreach (var orderItem in CurrentOrder)
@@ -97,7 +94,7 @@
         }
     }
 
-    async Task RemoveFromOrder(MenuItem item)
+    async Task RemoveFromOrder(OrderItem item)
     {
         CurrentOrder.Remove(item);
 
@@ -111,7 +108,7 @@
     public decimal OrderTotal = 0;
     public decimal SalesTax = 0.06m;
 
-    List<MenuItem> CurrentOrder = new List<MenuItem>();
+    List<OrderItem> CurrentOrder = new List<OrderItem>();
 
     List<MenuItem> FoodMenuItems = new List<MenuItem>();
     List<MenuItem> CoffeeMenuItems = new List<MenuItem>();
