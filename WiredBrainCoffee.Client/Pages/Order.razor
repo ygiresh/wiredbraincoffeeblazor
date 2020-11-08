@@ -1,5 +1,6 @@
 ﻿@page "/Order"
 @using WiredBrainCoffee.Models
+
 <div class="container">
     <div class="order-page">
         <Row>
@@ -19,30 +20,19 @@
                     </Items>
                     <Content>
                         <TabPanel Name="coffee">
-                            <p>The coffee will go here.</p>
+                            @foreach (var item in CoffeeMenuItems)
+                            {
+                                <MenuListItem MenuItem="item" OnClickCallback="(e => AddExtras(item))" />
+                            }
                         </TabPanel>
                         <TabPanel Name="food">
-                            @foreach (var item in MenuItems)
+                            @foreach (var item in FoodMenuItems)
                             {
-                                <div class="menu-item">
-                                    <div class="menu-item-image">
-                                        <img src="@item.ImageFile" />
-                                    </div>
-                                    <div class="menu-item-info">
-                                        <p class="menu-item-title"><b>@item.Name</b></p>
-                                        <p class="menu-item-summary">@item.Summary</p>
-                                        <div class="menu-item-actions">
-                                            <span class="menu-item-price"><b>Price: @item.Price.ToString("C")</b></span>
-                                            <Button @onclick="(e => AddToOrder(item))" Color="Color.Light">Add to Order</Button>
-                                        </div>
-                                    </div>
-                                </div>
+                                <MenuListItem MenuItem="item" OnClickCallback="(e => AddToOrder(item))" />
                             }
                         </TabPanel>
                     </Content>
                 </Tabs>
-
-
             </Column>
             <Column ColumnSize="ColumnSize.Is4">
                 <div class="order-info">
@@ -50,45 +40,85 @@
                     <ul class="current-order-list">
                         @foreach (var item in CurrentOrder)
                         {
-                            <li><span>@item.Name</span><span>@item.Price.ToString("C")</span></li>
+                            <li>
+                                <span>@item.Name</span><span>@item.Price.ToString("C")</span><span class="remove-item" @onclick="(e => RemoveFromOrder(item))">X</span>
+                            </li>
+                            <ul>
+                                @foreach (var addin in item.AddIns)
+                                {
+                                    <li>@addin</li>
+                                }
+                            </ul>
                         }
                     </ul>
-                    <p><span>Your Total:</span><span>@OrderTotal.ToString("C")</span></p>
                     <hr />
-                    <Button Color="Color.Success">Checkout</Button>
+                    <p class="sub-line"><span>Sales Tax:</span><span>@((OrderTotal * SalesTax).ToString("C"))</span></p>
+                    <p class="sub-line"><span>Your Total:</span><span>@((OrderTotal + (SalesTax * OrderTotal)).ToString("C"))</span></p>
+                    <hr />
+                    <Button Color="Color.Success" class="float-right">Place Order</Button>
                 </div>
             </Column>
         </Row>
+
     </div>
 </div>
 @code {
-    string selectedTab = "food";
+    string selectedTab = "coffee";
 
     private void OnSelectedTabChanged(string name)
     {
         selectedTab = name;
     }
 
-    public decimal OrderTotal = 0;
+    [CascadingParameter] public IModalService Modal { get; set; }
 
-    List<MenuItem> CurrentOrder = new List<MenuItem>();
+    async Task AddExtras(MenuItem item)
+    {
+        var formModal = Modal.Show<SignUpForm>("Enhance Your Coffee");
+        var result = await formModal.Result;
 
-    List<MenuItem> MenuItems = new List<MenuItem>();
+        if (!result.Cancelled)
+        {
+            item.AddIns.AddRange((IEnumerable<string>)result.Data);
 
-    public void AddToOrder(MenuItem item)
+            AddToOrder(item);
+            item.AddIns.Clear();
+        }
+    }
+
+    async Task AddToOrder(MenuItem item)
     {
         CurrentOrder.Add(item);
 
         OrderTotal = 0;
-        @foreach(var orderItem in CurrentOrder)
+        @foreach (var orderItem in CurrentOrder)
         {
             OrderTotal += orderItem.Price;
         }
     }
 
+    async Task RemoveFromOrder(MenuItem item)
+    {
+        CurrentOrder.Remove(item);
+
+        OrderTotal = 0;
+        @foreach (var orderItem in CurrentOrder)
+        {
+            OrderTotal += orderItem.Price;
+        }
+    }
+
+    public decimal OrderTotal = 0;
+    public decimal SalesTax = 0.06m;
+
+    List<MenuItem> CurrentOrder = new List<MenuItem>();
+
+    List<MenuItem> FoodMenuItems = new List<MenuItem>();
+    List<MenuItem> CoffeeMenuItems = new List<MenuItem>();
+
     protected override Task OnInitializedAsync()
     {
-        MenuItems.AddRange(new List<MenuItem>() {
+        FoodMenuItems.AddRange(new List<MenuItem>() {
         new MenuItem()
         {
             Id = 1,
@@ -101,30 +131,11 @@
         },
         new MenuItem()
         {
-            Id = 2,
-            Name = "Ground to Go",
-            Slug = "ground-coffee",
-            Summary = "Love our coffee? Take it with you so you never have to be without!",
-            Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
-            ImageFile = "images/menu/ground.png",
-            Price = 5
-        },
-        new MenuItem()
-        {
             Id = 3,
             Name = "Granola with Nuts",
             Summary = "It's not flashy, but it sure is healthy.  Perfect for when you need the calories, but not the guilt.",
             Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
             ImageFile = "images/menu/granola.png",
-            Price = 5
-        },
-        new MenuItem()
-        {
-            Id = 4,
-            Name = "Bean there, done that!",
-            Summary = "Do you prefer to grind your own coffee? No problem, we'll give you the beans.",
-            Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
-            ImageFile = "images/menu/beans.jpg",
             Price = 5
         },
         new MenuItem()
@@ -144,8 +155,74 @@
             Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
             ImageFile = "images/menu/strawberries.png",
             Price = 5
+        },
+        new MenuItem()
+        {
+            Id = 6,
+            Name = "Cupcake",
+            Summary = "We've got strawberries, blueberries, apples, bananas - we could list them all, but we'd prefer you come take a look!",
+            Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
+            ImageFile = "images/menu/cupcake.png",
+            Price = 5
+        },
+        new MenuItem()
+        {
+            Id = 6,
+            Name = "Muffin",
+            Summary = "We've got strawberries, blueberries, apples, bananas - we could list them all, but we'd prefer you come take a look!",
+            Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
+            ImageFile = "images/menu/muffin.png",
+            Price = 5
+        },
+        new MenuItem()
+        {
+            Id = 6,
+            Name = "Breakfast Sandwich",
+            Summary = "We've got strawberries, blueberries, apples, bananas - we could list them all, but we'd prefer you come take a look!",
+            Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
+            ImageFile = "images/menu/sandwich.png",
+            Price = 5
         } });
 
+        CoffeeMenuItems.AddRange(new List<MenuItem>() {
+        new MenuItem()
+        {
+            Id = 1,
+            Name = "Dark Brewed Coffee",
+            Slug = "dark-brew",
+            Summary = "A classic, refreshing original.",
+            Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
+            ImageFile = "images/menu/ground.png",
+            Price = 5
+        },
+        new MenuItem()
+        {
+            Id = 2,
+            Name = "Americano",
+            Slug = "ground-coffee",
+            Summary = "Still classic, but a little more sophisticated.",
+            Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
+            ImageFile = "images/menu/beans.jpg",
+            Price = 5
+        },
+        new MenuItem()
+        {
+            Id = 3,
+            Name = "Cappucino",
+            Summary = "Rich and foamy, its the perfect comfort-coffee.",
+            Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
+            ImageFile = "images/menu/cup.png",
+            Price = 5
+        },
+        new MenuItem()
+        {
+            Id = 3,
+            Name = "Latte",
+            Summary = "More than just coffee, but still just coffee.",
+            Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
+            ImageFile = "images/menu/ground.png",
+            Price = 5
+        } });
 
         return base.OnInitializedAsync();
     }

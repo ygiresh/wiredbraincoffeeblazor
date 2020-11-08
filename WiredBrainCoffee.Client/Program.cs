@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Blazored.Modal;
 
 namespace WiredBrainCoffee.Client
 {
@@ -21,8 +22,8 @@ namespace WiredBrainCoffee.Client
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-            builder.Services
-              .AddBlazorise(options =>
+            builder.Services.AddBlazoredModal();
+            builder.Services.AddBlazorise(options =>
               {
                   options.ChangeTextOnKeyPress = true;
               })

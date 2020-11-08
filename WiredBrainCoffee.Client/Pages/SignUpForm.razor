@@ -1,0 +1,61 @@
+﻿@using WiredBrainCoffee.Models 
+
+<div class="simple-form">
+    <EditForm Model="AddIns">
+        <div class="form-group">
+            <InputCheckbox @bind-Value="AddIns.AddMilk" />
+            <label for="first-name">Add Milk</label>
+        </div>
+        <div class="form-group">
+            <InputCheckbox @bind-Value="AddIns.AddSugar" />
+            <label for="first-name">Add Sugar</label>
+        </div>
+        <div class="form-group">
+            <InputCheckbox @bind-Value="AddIns.AddCreamer" />
+            <label for="first-name">Add Creamer</label>
+        </div>
+        <div class="form-group">
+            <InputCheckbox @bind-Value="AddIns.AddWhipCream" />
+            <label for="first-name">Add Whip Cream</label>
+        </div>
+    </EditForm>
+    <button @onclick="Cancel" class="btn btn-secondary">Cancel</button>
+    <button @onclick="SubmitForm" class="btn btn-primary float-right">Okay</button>
+</div>
+
+@code {
+
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+
+    public AddIns AddIns = new AddIns();
+
+    void SubmitForm()
+    {
+        // Just put this in a simple list for now
+        var extras = new List<string>();
+
+        if(AddIns.AddMilk)
+        {
+            extras.Add("Milk");
+        }
+        if (AddIns.AddSugar)
+        {
+            extras.Add("Sugar");
+        }
+        if (AddIns.AddCreamer)
+        {
+            extras.Add("Creamer");
+        }
+        if (AddIns.AddWhipCream)
+        {
+            extras.Add("Whip cream");
+        }
+
+        BlazoredModal.Close(ModalResult.Ok(extras));
+    }
+
+    void Cancel()
+    {
+        BlazoredModal.Cancel();
+    }
+}

@@ -161,3 +161,12 @@ a, .btn-link {
     margin-top: 10px;
     background: #fff;
 }
+
+.sub-line {
+    text-align: right;
+}
+
+.remove-item {
+    cursor: pointer;
+    text-align: right;
+}
