@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Blazored.Modal;
+using WiredBrainCoffee.Services;
 
 namespace WiredBrainCoffee.Client
 {
@@ -29,6 +30,9 @@ namespace WiredBrainCoffee.Client
               })
               .AddBootstrapProviders()
               .AddFontAwesomeIcons();
+
+            builder.Services.AddHttpClient<MenuService>(client =>
+                client.BaseAddress = new Uri("https://localhost:44376/"));
 
             var host = builder.Build();
 

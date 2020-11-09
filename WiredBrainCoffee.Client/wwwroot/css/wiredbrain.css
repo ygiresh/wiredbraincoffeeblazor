@@ -2,6 +2,8 @@ body {
     padding-top: 54px;
     background-color: #F1EFEE !important;
     padding-bottom: 0px;
+    font-family: "Calibri";
+    font-size: 1.2em;
 }
 
 .body-content {
@@ -57,11 +59,6 @@ body {
     height: 250px;
 }
 
-.card {
-    float: left;
-    margin: 10px;
-}
-
 .bg-ground {
     background-image: url("../images/ground.jpg");
     background-size: cover;
@@ -77,14 +74,6 @@ body {
     background-image: url("../images/table.jpg");
     background-size: cover;
     background-position-y: -110px;
-}
-
-.carousel-item {
-    background: no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
 }
 
 .card-title a {
@@ -110,7 +99,9 @@ body {
     display: flex;
     position: relative;
     padding: 10px 10px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
 }
 
 .menu-item-info {
@@ -171,14 +162,6 @@ a, .btn-link {
     cursor: pointer;
     text-align: right;
 }
-.extras-modal {
-    min-width: 500px;
-    min-height: 500px;
-}
-
-.blazored-modal {
-    padding: 50px;
-}
 
 .extra-row {
     display: flex;
@@ -216,4 +199,9 @@ a, .btn-link {
 
 .place-order {
     margin: 10px 0;
+}
+
+.page-wrapper {
+    margin: 25px 0;
+    min-height: 700px;
 }

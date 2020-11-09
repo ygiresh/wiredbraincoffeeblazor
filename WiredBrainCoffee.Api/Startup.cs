@@ -50,6 +50,8 @@ namespace WiredBrainCoffee.Api
 
             app.UseAuthorization();
 
+            app.UseCors(x => x.AllowAnyOrigin());
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -1,75 +1,77 @@
 ﻿@page "/Contact"
+@inject NavigationManager NavManager
+<div class="page-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Contact Us</h2>
+                <p>We'd love to hear from you! We try our best to respond within 24 hours.</p>
+                <hr />
+                <div class="contact-form">
+                    <EditForm Model="@ContactForm" OnValidSubmit="@HandleValidSubmit">
+                        <DataAnnotationsValidator />
+                        <Microsoft.AspNetCore.Components.Forms.ValidationSummary />
+                        <div class="form-group">
+                            <label for="name">Name: </label>
+                            <InputText id="firstName" class="form-control" @bind-Value="@ContactForm.Name" placeholder="Enter first name"></InputText>
+                            <ValidationMessage For="@(() => ContactForm.Name)" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email: </label>
+                            <InputText id="email" class="form-control" @bind-Value="@ContactForm.Email" placeholder="Enter email"></InputText>
+                            <ValidationMessage For="@(() => ContactForm.Email)" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Phone: </label>
+                            <InputText id="email" class="form-control" @bind-Value="@ContactForm.Phone" placeholder="Enter phone"></InputText>
+                            <ValidationMessage For="@(() => ContactForm.Phone)" />
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message: </label>
+                            <InputTextArea id="message" class="form-control" @bind-Value="@ContactForm.Message" placeholder="Enter message"></InputTextArea>
+                            <ValidationMessage For="@(() => ContactForm.Message)" />
+                        </div>
 
-<div class="container">
-    <br />
-    <h2>Contact Us</h2>
-    <p>We'd love to hear from you! We try our best to respond within 24 hours.</p>
-    <hr />
-    <div class="row">
-        <div class="col-md-8">
-            <div class="contact-form">
-                <EditForm Model="@ContactForm" OnValidSubmit="@HandleValidSubmit">
-                    <DataAnnotationsValidator />
-                    <Microsoft.AspNetCore.Components.Forms.ValidationSummary />
-                    <div class="form-group">
-                        <label for="name">Name: </label>
-                        <InputText id="firstName" class="form-control" @bind-Value="@ContactForm.Name" placeholder="Enter first name"></InputText>
-                        <ValidationMessage For="@(() => ContactForm.Name)" />
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email: </label>
-                        <InputText id="email" class="form-control" @bind-Value="@ContactForm.Email" placeholder="Enter email"></InputText>
-                        <ValidationMessage For="@(() => ContactForm.Email)" />
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Phone: </label>
-                        <InputText id="email" class="form-control" @bind-Value="@ContactForm.Phone" placeholder="Enter phone"></InputText>
-                        <ValidationMessage For="@(() => ContactForm.Phone)" />
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message: </label>
-                        <InputTextArea id="message" class="form-control" @bind-Value="@ContactForm.Message" placeholder="Enter message"></InputTextArea>
-                        <ValidationMessage For="@(() => ContactForm.Message)" />
-                    </div>
-
-                    <button type="submit" class="btn btn-success">Submit</button>
-                </EditForm>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </EditForm>
+                </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div>
-                <h3>Keep in Touch</h3>
-                <p>Sign up for our mailing list - no spam, we promise.</p>
-                <form asp-page-handler="Subscribe">
-                    <div class="control-group form-group">
-                        <input name="address" type="text" class="form-control" placeholder="Email" />
-                    </div>
-                    <div class="control-group form-group">
-                        <input type="submit" class="btn btn-success" value="Join" />
-                    </div>
-                </form>
+            <div class="col-md-4">
+                <div>
+                    <h3>Keep in Touch</h3>
+                    <p>Sign up for our mailing list - no spam, we promise.</p>
+                    <form asp-page-handler="Subscribe">
+                        <div class="control-group form-group">
+                            <input name="address" type="text" class="form-control" placeholder="Email" />
+                        </div>
+                        <div class="control-group form-group">
+                            <input type="submit" class="btn btn-success" value="Join" />
+                        </div>
+                    </form>
+                </div>
+                <hr />
+                <div>
+                    <h3>Contact Details</h3>
+                    <p>
+                        1234 Wired Brain Blvd
+                        <br>Awesome City, MM 55555
+                        <br>
+                    </p>
+                    <p>
+                        <span title="Phone">Phone</span>: (555) 456-7890<br />
+                        <span title="Hours">Hours</span>: Monday - Friday: 6:00 AM to 9:00 PM
+                    </p>
+                </div>
+                <img style="width: 100%" src="images/placeholder.png" />
             </div>
-            <hr />
-            <div>
-                <h3>Contact Details</h3>
-                <p>
-                    1234 Wired Brain Blvd
-                    <br>Awesome City, MM 55555
-                    <br>
-                </p>
-                <p>
-                    <span title="Phone">Phone</span>: (555) 456-7890<br />
-                    <span title="Hours">Hours</span>: Monday - Friday: 6:00 AM to 9:00 PM
-                </p>
-            </div>
-            <img style="width: 100%" src="images/placeholder.png" />
         </div>
     </div>
-    @code {
-        public WiredBrainCoffee.Models.Contact ContactForm = new WiredBrainCoffee.Models.Contact();
-
-        protected async Task HandleValidSubmit()
-        {
-        }
-    }
 </div>
+@code {
+    public WiredBrainCoffee.Models.Contact ContactForm = new WiredBrainCoffee.Models.Contact();
+
+    protected void HandleValidSubmit()
+    {
+        NavManager.NavigateTo("contact-confirmation");
+    }
+}

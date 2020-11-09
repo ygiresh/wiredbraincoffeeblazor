@@ -8,7 +8,7 @@ namespace WiredBrainCoffee.Services
 {
     public interface IMenuService
     {
-        List<MenuItem> GetMenuItems();
+        Task<List<MenuItem>> GetMenuItems();
 
         List<MenuItem> GetPopularItems();
     }
