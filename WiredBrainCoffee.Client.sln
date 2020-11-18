@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30509.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiredBrainCoffee.Client", "WiredBrainCoffee.Client\WiredBrainCoffee.Client.csproj", "{FC97BD6B-55BC-4A3F-AC77-D9719541382E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WiredBrainCoffee.Client", "WiredBrainCoffee.Client\WiredBrainCoffee.Client.csproj", "{FC97BD6B-55BC-4A3F-AC77-D9719541382E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiredBrainCoffee.Api", "WiredBrainCoffee.Api\WiredBrainCoffee.Api.csproj", "{D95E9C5B-6D86-4901-9E00-7F21D86F9B26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WiredBrainCoffee.Api", "WiredBrainCoffee.Api\WiredBrainCoffee.Api.csproj", "{D95E9C5B-6D86-4901-9E00-7F21D86F9B26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiredBrainCoffee.Models", "WiredBrainCoffee.Models\WiredBrainCoffee.Models.csproj", "{1659F021-5D2E-45B2-8A5D-6D86EB27C226}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WiredBrainCoffee.Models", "WiredBrainCoffee.Models\WiredBrainCoffee.Models.csproj", "{1659F021-5D2E-45B2-8A5D-6D86EB27C226}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

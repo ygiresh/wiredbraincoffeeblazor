@@ -26,6 +26,36 @@ namespace WiredBrainCoffee.Api.Controllers
             MenuItems = new List<MenuItem>() {
                 new MenuItem()
                 {
+                    Id = 6,
+                    Name = "Cupcake",
+                    Summary = "Vanilla cupcakes with the perfect level of sweetness.",
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
+                    ImageFile = "images/menu/cupcake.png",
+                    Price = 5,
+                    Category = "Food"
+                },
+                new MenuItem()
+                {
+                    Id = 6,
+                    Name = "Muffin",
+                    Summary = "A freshly baked chocolate ship muffin - the perfect way to start a Monday morning.",
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
+                    ImageFile = "images/menu/muffin.png",
+                    Price = 5,
+                    Category = "Food"
+                },
+                new MenuItem()
+                {
+                    Id = 6,
+                    Name = "Chocolate Bites",
+                    Summary = "Rich and sweet chocolate bites for those in need of a special treat.",
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
+                    ImageFile = "images/menu/chocolate.png",
+                    Price = 5,
+                    Category = "Food"
+                },
+                new MenuItem()
+                {
                     Id = 1,
                     Name = "Frosted Pumpkin Bread",
                     Slug = "pumpkin-bread",
@@ -67,42 +97,22 @@ namespace WiredBrainCoffee.Api.Controllers
                 },
                 new MenuItem()
                 {
-                    Id = 6,
-                    Name = "Cupcake",
-                    Summary = "We've got strawberries, blueberries, apples, bananas - we could list them all, but we'd prefer you come take a look!",
-                    Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
-                    ImageFile = "images/menu/cupcake.png",
-                    Price = 5,
-                    Category = "Food"
-                },
-                new MenuItem()
-                {
-                    Id = 6,
-                    Name = "Muffin",
-                    Summary = "We've got strawberries, blueberries, apples, bananas - we could list them all, but we'd prefer you come take a look!",
-                    Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
-                    ImageFile = "images/menu/muffin.png",
-                    Price = 5,
-                    Category = "Food"
-                },
-                new MenuItem()
-                {
-                    Id = 6,
-                    Name = "Breakfast Sandwich",
-                    Summary = "We've got strawberries, blueberries, apples, bananas - we could list them all, but we'd prefer you come take a look!",
-                    Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
-                    ImageFile = "images/menu/sandwich.png",
-                    Price = 5,
-                    Category = "Food"
-                },
-                new MenuItem()
-                {
                     Id = 1,
                     Name = "Dark Brewed Coffee",
                     Slug = "dark-brew",
                     Summary = "A classic, refreshing original.",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
                     ImageFile = "images/menu/ground.png",
+                    Price = 5,
+                    Category = "Coffee"
+                },
+                new MenuItem()
+                {
+                    Id = 3,
+                    Name = "Latte",
+                    Summary = "More than just coffee, but still just coffee.",
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
+                    ImageFile = "images/menu/cappucino.png",
                     Price = 5,
                     Category = "Coffee"
                 },
@@ -124,16 +134,6 @@ namespace WiredBrainCoffee.Api.Controllers
                     Summary = "Rich and foamy, its the perfect comfort-coffee.",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
                     ImageFile = "images/menu/cup.png",
-                    Price = 5,
-                    Category = "Coffee"
-                },
-                new MenuItem()
-                {
-                    Id = 3,
-                    Name = "Latte",
-                    Summary = "More than just coffee, but still just coffee.",
-                    Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
-                    ImageFile = "images/menu/ground.png",
                     Price = 5,
                     Category = "Coffee"
                 } };

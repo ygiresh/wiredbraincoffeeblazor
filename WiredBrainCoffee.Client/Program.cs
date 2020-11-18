@@ -32,7 +32,7 @@ namespace WiredBrainCoffee.Client
               .AddFontAwesomeIcons();
 
             builder.Services.AddHttpClient<MenuService>(client =>
-                client.BaseAddress = new Uri("https://localhost:44376/"));
+                client.BaseAddress = new Uri("https://localhost:3001/"));
 
             var host = builder.Build();
 
