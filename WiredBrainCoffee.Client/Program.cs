@@ -33,6 +33,8 @@ namespace WiredBrainCoffee.Client
 
             builder.Services.AddHttpClient<MenuService>(client =>
                 client.BaseAddress = new Uri("https://localhost:3001/"));
+            builder.Services.AddHttpClient<FileService>(client =>
+                client.BaseAddress = new Uri("https://localhost:3001/"));
 
             var host = builder.Build();
 
