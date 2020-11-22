@@ -172,9 +172,9 @@ a, .btn-link {
     cursor: pointer;
 }
 
-.add-extra:hover {
-    text-decoration: underline;
-}
+    .add-extra:hover {
+        text-decoration: underline;
+    }
 
 .order-wrapper {
     padding: 10px 5px;
@@ -204,4 +204,14 @@ a, .btn-link {
 .page-wrapper {
     margin: 25px 0;
     min-height: 700px;
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: none;
+}
+
+@media only screen and (min-width: 768px) {
+    .blazored-modal {
+        min-width: 500px;
+    }
 }

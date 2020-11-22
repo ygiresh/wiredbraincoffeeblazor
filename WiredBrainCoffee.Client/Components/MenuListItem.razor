@@ -21,4 +21,12 @@
 
     [Parameter]
     public EventCallback<MenuItem> OnClickCallback { get; set; }
+
+    bool detailsExpanded;
+
+    void OnToggle()
+    {
+        Console.WriteLine("???");
+        detailsExpanded = !detailsExpanded;
+    }
 }

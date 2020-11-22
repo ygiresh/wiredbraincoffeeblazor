@@ -15,5 +15,7 @@ namespace WiredBrainCoffee.Models
         public string Email { get; set; }
 
         public string Message { get; set; }
+
+        public ContactReason Reason { get; set; }
     }
 }

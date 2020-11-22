@@ -1,6 +1,6 @@
 ﻿@page "/order"
 @using WiredBrainCoffee.Models
- 
+@inject IJSRuntime jsRuntime
 @inject WiredBrainCoffee.Services.MenuService Http
 @inject NavigationManager NavManager
 
@@ -17,10 +17,10 @@
             <div class="col-md-8">
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item">
-                        <a @onclick="ShowCoffee" class="nav-link @(CoffeeHidden ? "":"active")">Coffee</a>
+                        <a @onclick="ShowCoffee" class="nav-link @(CoffeeHidden ? "" : "active")">Coffee</a>
                     </li>
                     <li class="nav-item">
-                        <a @onclick="ShowFood" class="nav-link @(FoodHidden ? "":"active")">Food</a>
+                        <a @onclick="ShowFood" class="nav-link @(FoodHidden ? "" : "active")">Food</a>
                     </li>
                 </ul>
                 <div class="tab-containers">
@@ -49,6 +49,12 @@
                         <p class="sub-line"><span>Sales Tax:</span><span>@((OrderTotal * SalesTax).ToString("C"))</span></p>
                         <p class="sub-line"><span>Your Total:</span><span>@((OrderTotal + (SalesTax * OrderTotal)).ToString("C"))</span></p>
                         <hr />
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Enter coupon code" type="text" @bind-value="PromoCode" />
+                            <Button @onclick="CheckPromoCode">Check Code</Button>
+                            <p hidden="@(!IsValidPromoCode)">Valid promo!</p>
+                            <p hidden="@(IsValidPromoCode || string.IsNullOrEmpty(PromoCode))">Sorry, invalid code.</p>
+                        </div>
                         <Button @onclick="PlaceOrder" Color="Color.Success" class="float-right">Place Order</Button>
                     </div>
                 </div>
@@ -59,6 +65,8 @@
 @code {
     private bool CoffeeHidden { get; set; } = false;
     private bool FoodHidden { get; set; } = true;
+    private string PromoCode { get; set; } = "";
+    private bool IsValidPromoCode { get; set; } = false;
 
     private void ShowCoffee()
     {
@@ -129,8 +137,16 @@
     List<MenuItem> FoodMenuItems = new List<MenuItem>();
     List<MenuItem> CoffeeMenuItems = new List<MenuItem>();
 
+    public async Task CheckPromoCode()
+    {
+        module = await jsRuntime.InvokeAsync<IJSObjectReference>("import", "./js/promocode.js");
+        IsValidPromoCode = await module.InvokeAsync<bool>("CheckPromoCode", PromoCode);
+    }
+
+    IJSObjectReference module;
     protected async override Task OnInitializedAsync()
     {
+
         var menuItems = await Http.GetMenuItems();
 
         FoodMenuItems = menuItems.Where(x => x.Category == "Food").ToList();
