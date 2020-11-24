@@ -63,7 +63,7 @@
 
     private async void HandleValidSubmit()
     {
-        await ContactService.SubmitContact(Contact, selectedFiles);
+        await ContactService.PostContact(Contact, selectedFiles);
         NavManager.NavigateTo("contact-confirmation");
     }
 }

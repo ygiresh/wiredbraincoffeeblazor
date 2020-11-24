@@ -18,9 +18,9 @@ namespace WiredBrainCoffee.Services
             this.http = http;
         }
 
-        public async Task SubmitContact(Contact contact, IReadOnlyList<IBrowserFile> files)
+        public async Task PostContact(Contact contact, IReadOnlyList<IBrowserFile> attachedFiles)
         {
-            foreach(var file in files)
+            foreach(var file in attachedFiles)
             {
                 var buffer = new byte[file.Size];
                 await file.OpenReadStream().ReadAsync(buffer);
@@ -28,7 +28,6 @@ namespace WiredBrainCoffee.Services
                 contact.AttachedFiles.Add(new UploadedFile()
                 {
                     FileName = file.Name,
-                    ContentType = file.ContentType,
                     FileContent = buffer
                 });
             }
