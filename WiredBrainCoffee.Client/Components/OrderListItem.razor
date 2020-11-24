@@ -17,6 +17,7 @@
     }
     <div><span class="remove-item" @onclick="(() => OnClickCallback.InvokeAsync(OrderItem))">Remove</span></div>
 </div>
+
 @code {
     [Parameter]
     public OrderItem OrderItem { get; set; }

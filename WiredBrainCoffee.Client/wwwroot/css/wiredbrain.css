@@ -215,3 +215,11 @@ a, .btn-link {
         min-width: 500px;
     }
 }
+
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+.blazored-modal-container {
+    z-index: 5000;
+}

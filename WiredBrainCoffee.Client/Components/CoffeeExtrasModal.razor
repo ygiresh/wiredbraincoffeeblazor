@@ -1,10 +1,10 @@
 ﻿@namespace WiredBrainCoffeeClient.Components
 @using WiredBrainCoffee.Models
 
-<div class="simple-form">
+<div class="simple-form extras">
     <EditForm Model="Extras">
         <div class="form-group">
-            <label for="first-name">Add Milk</label>
+            <label for="milk">Add Milk</label>
             <InputSelect class="form-control" @bind-Value="Extras.Milk">
                 <option selected value="None">None</option>
                 <option value="Low Fat">Low Fat</option>
@@ -12,23 +12,17 @@
                 <option value="Whole">Whole Milk</option>
             </InputSelect>
         </div>
-        @*<div class="form-group">
-            <label for="first-name">Add Creamer</label>
-            <InputSelect class="form-control" @bind-Value="Extras.Creamer">
-                <option selected value="None">None</option>
-                <option value="Light">Light</option>
-                <option value="Regular">Regular</option>
-                <option value="Heavy">Heavy</option>
-            </InputSelect>
-        </div>*@
-        <InputRadioGroup @bind-Value="Extras.Creamer">
-            @foreach (var option in (CreamerOptions[])Enum.GetValues(typeof(CreamerOptions)))
-            {
-                <InputRadio Value="option" /><span>&nbsp;&nbsp;@option</span><br />
-            }
-        </InputRadioGroup>
         <div class="form-group">
-            <label for="first-name">Add Flavor</label>
+            <label for="creamer">Add Creamer</label>
+            <InputRadioGroup @bind-Value="Extras.Creamer">
+                <br /><InputRadio Value="CreamerOptions.None" /><span>None</span>
+                <br /><InputRadio Value="CreamerOptions.Light" /><span>Light</span>
+                <br /><InputRadio Value="CreamerOptions.Regular" /><span>Regular</span>
+                <br /><InputRadio Value="CreamerOptions.Heavy" /><span>Heavy</span>
+            </InputRadioGroup>
+        </div>
+        <div class="form-group">
+            <label for="flavor">Add Flavor</label>
             <InputSelect class="form-control" @bind-Value="Extras.Flavor">
                 <option selected value="None">None</option>
                 <option value="Mocha">Mocha</option>
@@ -37,7 +31,7 @@
             </InputSelect>
         </div>
         <div class="form-group">
-            <label for="first-name">Add Flavor</label>
+            <label for="toppings">Add Toppings</label>
             <InputSelect class="form-control" @bind-Value="Extras.Topping">
                 <option selected value="None">None</option>
                 <option value="Whipped Cream">Whipped Cream</option>

@@ -22,58 +22,19 @@ namespace WiredBrainCoffee.Api.Controllers
             this.webHostEnvironment = webHostEnvironment;
         }
 
-        [HttpPost("file")]
-        public IActionResult OnPostUploadAsync()
+        [HttpPost()]
+        public void Post(Contact contact)
         {
-            try
+            // Todo: Save contact info to the database
+
+            // Write uploaded files to images directory
+            foreach(var file in contact.AttachedFiles)
             {
-                var file = Request.Form.Files[0];
-                var folderName = Path.Combine("StaticFiles", "Images");
-                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-                if (file.Length > 0)
-                {
-                    var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                    var fullPath = Path.Combine(pathToSave, fileName);
-                    var dbPath = Path.Combine(folderName, fileName);
-                    using (var stream = new FileStream(fullPath, FileMode.Create))
-                    {
-                        file.CopyTo(stream);
-                    }
-                    return Ok(dbPath);
-                }
-                else
-                {
-                    return BadRequest();
-                }
+                var path = $"{webHostEnvironment.ContentRootPath}\\images\\{file.FileName}";
+                var fs = System.IO.File.Create(path);
+                fs.Write(file.FileContent, 0, file.FileContent.Length);
+                fs.Close();
             }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex}");
-            }
-
-            
-        }
-
-        [HttpPost("image")]
-        public async Task<IActionResult> UploadImage(IFormFile image)
-        {
-            string uploadsFolder = Path.Combine(webHostEnvironment.ContentRootPath, "images");
-            string filePath = Path.Combine(uploadsFolder, image.FileName);
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                image.CopyTo(fileStream);
-            }
-
-            return Ok();
-        }
-
-        [HttpPost("upload")]
-        public void Post(UploadedFile uploadedFile)
-        {
-            var path = $"{webHostEnvironment.ContentRootPath}\\{uploadedFile.FileName}";
-            var fs = System.IO.File.Create(path);
-            fs.Write(uploadedFile.FileContent, 0, uploadedFile.FileContent.Length);
-            fs.Close();
         }
     }
 }

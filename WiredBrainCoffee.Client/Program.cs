@@ -31,9 +31,9 @@ namespace WiredBrainCoffee.Client
               .AddBootstrapProviders()
               .AddFontAwesomeIcons();
 
-            builder.Services.AddHttpClient<MenuService>(client =>
+            builder.Services.AddHttpClient<IMenuService, MenuService>(client =>
                 client.BaseAddress = new Uri("https://localhost:3001/"));
-            builder.Services.AddHttpClient<FileService>(client =>
+            builder.Services.AddHttpClient<IContactService, ContactService>(client =>
                 client.BaseAddress = new Uri("https://localhost:3001/"));
 
             var host = builder.Build();

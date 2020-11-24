@@ -1,4 +1,4 @@
-﻿// Initialize and add the map
+﻿// This check would be fancy complicated in a real app
 export function CheckPromoCode(code) {
-    return code.indexOf(123) != -1;
+    return code.indexOf("wired") != -1;
 }

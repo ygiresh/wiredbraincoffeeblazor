@@ -1,8 +1,4 @@
 ﻿@page "/order"
-@using WiredBrainCoffee.Models
-@inject IJSRuntime jsRuntime
-@inject WiredBrainCoffee.Services.MenuService Http
-@inject NavigationManager NavManager
 
 <div class="page-wrapper">
     <div class="container">
@@ -50,10 +46,12 @@
                         <p class="sub-line"><span>Your Total:</span><span>@((OrderTotal + (SalesTax * OrderTotal)).ToString("C"))</span></p>
                         <hr />
                         <div class="form-group">
-                            <input class="form-control" placeholder="Enter coupon code" type="text" @bind-value="PromoCode" />
+                            <input @bind-value="PromoCode" type="text" placeholder="Enter coupon code" class="form-control"  />
                             <Button @onclick="CheckPromoCode">Check Code</Button>
-                            <p hidden="@(!IsValidPromoCode)">Valid promo!</p>
-                            <p hidden="@(IsValidPromoCode || string.IsNullOrEmpty(PromoCode))">Sorry, invalid code.</p>
+                            @if (!string.IsNullOrEmpty(PromoCode))
+                            {
+                                <p>@(IsValidPromoCode ? "Valid code!" : "Sorry, invalid code.")</p>
+                            }
                         </div>
                         <Button @onclick="PlaceOrder" Color="Color.Success" class="float-right">Place Order</Button>
                     </div>
@@ -62,95 +60,3 @@
         </div>
     </div>
 </div>
-@code {
-    private bool CoffeeHidden { get; set; } = false;
-    private bool FoodHidden { get; set; } = true;
-    private string PromoCode { get; set; } = "";
-    private bool IsValidPromoCode { get; set; } = false;
-
-    private void ShowCoffee()
-    {
-        CoffeeHidden = false;
-        FoodHidden = true;
-    }
-
-    private void ShowFood()
-    {
-        CoffeeHidden = true;
-        FoodHidden = false;
-    }
-
-    [CascadingParameter] public IModalService Modal { get; set; }
-
-    async Task AddExtras(MenuItem item)
-    {
-        item.Extras = new Extras();
-        var formModal = Modal.Show<CoffeeExtrasModal>("Enhance Your Coffee");
-        var result = await formModal.Result;
-
-        if (!result.Cancelled)
-        {
-            item.Extras = (Extras)result.Data;
-
-            AddToOrder(item);
-        }
-    }
-
-    public void AddToOrder(MenuItem item)
-    {
-        CurrentOrder.Add(new OrderItem()
-        {
-            Name = item.Name,
-            Id = item.Id,
-            Price = item.Price,
-            Extras = item.Extras
-        });
-
-        OrderTotal = 0;
-        @foreach (var orderItem in CurrentOrder)
-        {
-            OrderTotal += orderItem.Price;
-        }
-    }
-
-    public void RemoveFromOrder(OrderItem item)
-    {
-        CurrentOrder.Remove(item);
-
-        OrderTotal = 0;
-        @foreach (var orderItem in CurrentOrder)
-        {
-            OrderTotal += orderItem.Price;
-        }
-    }
-
-    public void PlaceOrder()
-    {
-        NavManager.NavigateTo("order-confirmation");
-    }
-
-    public decimal OrderTotal = 0;
-    public decimal SalesTax = 0.06m;
-
-    List<OrderItem> CurrentOrder = new List<OrderItem>();
-
-    List<MenuItem> FoodMenuItems = new List<MenuItem>();
-    List<MenuItem> CoffeeMenuItems = new List<MenuItem>();
-
-    public async Task CheckPromoCode()
-    {
-        module = await jsRuntime.InvokeAsync<IJSObjectReference>("import", "./js/promocode.js");
-        IsValidPromoCode = await module.InvokeAsync<bool>("CheckPromoCode", PromoCode);
-    }
-
-    IJSObjectReference module;
-    protected async override Task OnInitializedAsync()
-    {
-
-        var menuItems = await Http.GetMenuItems();
-
-        FoodMenuItems = menuItems.Where(x => x.Category == "Food").ToList();
-        CoffeeMenuItems = menuItems.Where(x => x.Category == "Coffee").ToList();
-    }
-
-}

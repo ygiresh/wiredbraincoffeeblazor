@@ -12,10 +12,10 @@ namespace WiredBrainCoffee.Api.Controllers
     [Route("[controller]")]
     public class MenuController : ControllerBase
     {
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<MenuController> _logger;
         private List<MenuItem> MenuItems { get; set; }
 
-        public MenuController(ILogger<WeatherForecastController> logger)
+        public MenuController(ILogger<MenuController> logger)
         {
             _logger = logger;
         }

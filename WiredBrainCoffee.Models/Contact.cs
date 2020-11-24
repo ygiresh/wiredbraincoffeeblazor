@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace WiredBrainCoffee.Models
 {
@@ -17,5 +18,7 @@ namespace WiredBrainCoffee.Models
         public string Message { get; set; }
 
         public ContactReason Reason { get; set; }
+
+        public List<UploadedFile> AttachedFiles { get; set; } = new List<UploadedFile>();
     }
 }
