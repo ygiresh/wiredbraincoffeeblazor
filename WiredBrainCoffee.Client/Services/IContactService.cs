@@ -7,6 +7,7 @@ namespace WiredBrainCoffee.Services
 {
     public interface IContactService
     {
+        Task PostContact(Contact contact);
         Task PostContact(Contact contact, IReadOnlyList<IBrowserFile> files);
     }
 }

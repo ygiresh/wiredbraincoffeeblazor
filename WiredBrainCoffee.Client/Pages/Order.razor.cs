@@ -14,7 +14,7 @@ namespace WiredBrainCoffee.Client.Pages
     public partial class Order
     {
         [Inject]
-        public IJSRuntime jsRuntime { get; set; }
+        public IJSRuntime JSRuntime { get; set; }
 
         [Inject]
         public IMenuService MenuService { get; set; }
@@ -31,9 +31,15 @@ namespace WiredBrainCoffee.Client.Pages
         public decimal OrderTotal { get; set; } = 0;
         public decimal SalesTax { get; set; } = 0.06m;
         private string PromoCode { get; set; } = "";
+        private bool FoodHidden { get; set; } = true;
         private bool IsValidPromoCode { get; set; } = false;
         private bool CoffeeHidden { get; set; } = false;
-        private bool FoodHidden { get; set; } = true;
+
+        public async Task CheckPromoCode()
+        {
+            module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/promocode.js");
+            IsValidPromoCode = await module.InvokeAsync<bool>("CheckPromoCode", PromoCode);
+        }
 
         private void ShowCoffee()
         {
@@ -84,11 +90,6 @@ namespace WiredBrainCoffee.Client.Pages
             NavManager.NavigateTo("order-confirmation");
         }
 
-        public async Task CheckPromoCode()
-        {
-            module = await jsRuntime.InvokeAsync<IJSObjectReference>("import", "./js/promocode.js");
-            IsValidPromoCode = await module.InvokeAsync<bool>("CheckPromoCode", PromoCode);
-        }
 
         IJSObjectReference module;
         protected async override Task OnInitializedAsync()

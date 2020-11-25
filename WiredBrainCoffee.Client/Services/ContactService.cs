@@ -18,7 +18,13 @@ namespace WiredBrainCoffee.Services
             this.http = http;
         }
 
-        public async Task PostContact(Contact contact, IReadOnlyList<IBrowserFile> attachedFiles)
+        public async Task PostContact(Contact contact)
+        {
+            await http.PostAsJsonAsync("contact", contact);
+        }
+
+        public async Task PostContact(Contact contact, 
+            IReadOnlyList<IBrowserFile> attachedFiles)
         {
             foreach(var file in attachedFiles)
             {

@@ -35,7 +35,7 @@
                             <InputTextArea id="message" class="form-control" @bind-Value="@Contact.Message" placeholder="Enter message"></InputTextArea>
                             <ValidationMessage For="@(() => Contact.Message)" />
                         </div>
-
+                        
                         <div class="form-group">
                             <InputFile OnChange="@OnInputFileChange" multiple />
                         </div>
@@ -54,6 +54,7 @@
 </div>
 @code {
     public Contact Contact = new Contact();
+
     IReadOnlyList<IBrowserFile> selectedFiles;
 
     private void OnInputFileChange(InputFileChangeEventArgs e)
