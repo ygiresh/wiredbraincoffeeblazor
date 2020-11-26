@@ -46,7 +46,8 @@
                         <p class="sub-line"><span>Your Total:</span><span>@((OrderTotal + (SalesTax * OrderTotal)).ToString("C"))</span></p>
                         <hr />
                         <div class="form-group">
-                            <input @bind-value="PromoCode" type="text" placeholder="Enter coupon code" class="form-control" />
+                            <p>Gift cards or coupons? Enter them here.</p>
+                            <input @bind-value="PromoCode" type="text" placeholder="Enter promo code" class="form-control" />
                             <p hidden="@IsValidPromoCode">Sorry, invalid code.</p>
                         </div>
                         <Button @onclick="PlaceOrder" Color="Color.Success" class="float-right">Place Order</Button>

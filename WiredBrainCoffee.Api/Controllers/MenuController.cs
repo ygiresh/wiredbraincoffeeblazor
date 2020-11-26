@@ -31,7 +31,7 @@ namespace WiredBrainCoffee.Api.Controllers
                     Summary = "Vanilla cupcakes with the perfect level of sweetness.",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
                     ImageFile = "images/menu/cupcake.png",
-                    Price = 5,
+                    Price = 4,
                     Category = "Food"
                 },
                 new MenuItem()
@@ -41,7 +41,7 @@ namespace WiredBrainCoffee.Api.Controllers
                     Summary = "A freshly baked chocolate chip muffin - the perfect way to start a Monday morning.",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
                     ImageFile = "images/menu/muffin.png",
-                    Price = 5,
+                    Price = 3,
                     Category = "Food"
                 },
                 new MenuItem()
@@ -62,7 +62,7 @@ namespace WiredBrainCoffee.Api.Controllers
                     Summary = "A seasonal delight we offer every autumn.  Pumpking bread with just a bit of spice, cream cheese frosting with just a hint of home.",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
                     ImageFile = "images/menu/pumpkinbread.png",
-                    Price = 5,
+                    Price = 4,
                     Category = "Food"
                 },
                 new MenuItem()
@@ -72,7 +72,17 @@ namespace WiredBrainCoffee.Api.Controllers
                     Summary = "It's not flashy, but it sure is healthy.  Perfect for when you need the calories, but not the guilt.",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
                     ImageFile = "images/menu/granola.png",
-                    Price = 5,
+                    Price = 3,
+                    Category = "Food"
+                },
+                new MenuItem()
+                {
+                    Id = 4,
+                    Name = "Chocolate Chip Cookies",
+                    Summary = "They're made fresh every day, and they taste like it..",
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
+                    ImageFile = "images/menu/cookies.png",
+                    Price = 2,
                     Category = "Food"
                 },
                 new MenuItem()
@@ -103,7 +113,7 @@ namespace WiredBrainCoffee.Api.Controllers
                     Summary = "A classic, refreshing original.",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
                     ImageFile = "images/menu/ground.png",
-                    Price = 5,
+                    Price = 2,
                     Category = "Coffee"
                 },
                 new MenuItem()
@@ -113,7 +123,7 @@ namespace WiredBrainCoffee.Api.Controllers
                     Summary = "More than just coffee, but still just coffee.",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
                     ImageFile = "images/menu/cappucino.png",
-                    Price = 5,
+                    Price = 3,
                     Category = "Coffee"
                 },
                 new MenuItem()
@@ -124,7 +134,7 @@ namespace WiredBrainCoffee.Api.Controllers
                     Summary = "Still classic, but a little more sophisticated.",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
                     ImageFile = "images/menu/beans.jpg",
-                    Price = 5,
+                    Price = 4,
                     Category = "Coffee"
                 },
                 new MenuItem()
@@ -134,7 +144,7 @@ namespace WiredBrainCoffee.Api.Controllers
                     Summary = "Rich and foamy, its the perfect comfort-coffee.",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
                     ImageFile = "images/menu/cup.png",
-                    Price = 5,
+                    Price = 4,
                     Category = "Coffee"
                 } };
 
