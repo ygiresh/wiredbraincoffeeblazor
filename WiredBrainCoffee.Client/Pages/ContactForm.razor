@@ -47,8 +47,6 @@
             <div class="col-md-4">
                 <MailingList />
                 <hr />
-                <ContactMap />
-                <hr />
                 <ContactInfo />
             </div>
         </div>
@@ -66,7 +64,6 @@
 
     private async void HandleValidSubmit()
     {
-
         await ContactService.PostContact(Contact, selectedFiles);
         NavManager.NavigateTo("contact-confirmation");
     }

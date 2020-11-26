@@ -16,8 +16,6 @@ namespace WiredBrainCoffee.Client.Pages
         [Inject]
         public IJSRuntime JSRuntime { get; set; }
 
-        public IJSObjectReference module;
-
         [Inject]
         public IMenuService MenuService { get; set; }
 

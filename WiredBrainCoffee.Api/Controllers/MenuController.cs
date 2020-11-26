@@ -38,7 +38,7 @@ namespace WiredBrainCoffee.Api.Controllers
                 {
                     Id = 6,
                     Name = "Muffin",
-                    Summary = "A freshly baked chocolate ship muffin - the perfect way to start a Monday morning.",
+                    Summary = "A freshly baked chocolate chip muffin - the perfect way to start a Monday morning.",
                     Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.",
                     ImageFile = "images/menu/muffin.png",
                     Price = 5,

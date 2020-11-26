@@ -19,9 +19,10 @@ namespace WiredBrainCoffee.Api.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IActionResult Get()
         {
-            return null;
+            // Todo
+            return Ok();
         }
     }
 }
