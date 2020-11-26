@@ -1,4 +1,5 @@
-﻿// This check would be fancy complicated in a real app
-export function CheckPromoCode(code) {
-    return code.indexOf("wired") != -1;
+﻿// This would be more complicated in a real app
+
+export function VerifyPromoCode(promoCode) {
+    return promoCode.indexOf("wired") != -1;
 }

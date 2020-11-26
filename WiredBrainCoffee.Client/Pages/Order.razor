@@ -13,20 +13,20 @@
             <div class="col-md-8">
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item">
-                        <a @onclick="ShowCoffee" class="nav-link @(CoffeeHidden ? "" : "active")">Coffee</a>
+                        <a @onclick="ShowCoffee" class="nav-link @(CoffeeTabHidden ? "" : "active")">Coffee</a>
                     </li>
                     <li class="nav-item">
-                        <a @onclick="ShowFood" class="nav-link @(FoodHidden ? "" : "active")">Food</a>
+                        <a @onclick="ShowFood" class="nav-link @(FoodTabHidden ? "" : "active")">Food</a>
                     </li>
                 </ul>
                 <div class="tab-containers">
-                    <div hidden="@CoffeeHidden" class="coffee-tab">
+                    <div hidden="@CoffeeTabHidden" class="coffee-tab">
                         @foreach (var item in CoffeeMenuItems)
                         {
                             <MenuListItem MenuItem="item" OnClickCallback="(e => AddExtras(item))" />
                         }
                     </div>
-                    <div hidden="@FoodHidden" class="food-tab hide">
+                    <div hidden="@FoodTabHidden" class="food-tab hide">
                         @foreach (var item in FoodMenuItems)
                         {
                             <MenuListItem MenuItem="item" OnClickCallback="(e => AddToOrder(item))" />
@@ -46,12 +46,8 @@
                         <p class="sub-line"><span>Your Total:</span><span>@((OrderTotal + (SalesTax * OrderTotal)).ToString("C"))</span></p>
                         <hr />
                         <div class="form-group">
-                            <input @bind-value="PromoCode" type="text" placeholder="Enter coupon code" class="form-control"  />
-                            <Button @onclick="CheckPromoCode">Check Code</Button>
-                            @if (!string.IsNullOrEmpty(PromoCode))
-                            {
-                                <p>@(IsValidPromoCode ? "Valid code!" : "Sorry, invalid code.")</p>
-                            }
+                            <input @bind-value="PromoCode" type="text" placeholder="Enter coupon code" class="form-control" />
+                            <p hidden="@IsValidPromoCode">Sorry, invalid code.</p>
                         </div>
                         <Button @onclick="PlaceOrder" Color="Color.Success" class="float-right">Place Order</Button>
                     </div>

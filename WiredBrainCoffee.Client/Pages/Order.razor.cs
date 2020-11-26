@@ -16,6 +16,8 @@ namespace WiredBrainCoffee.Client.Pages
         [Inject]
         public IJSRuntime JSRuntime { get; set; }
 
+        public IJSObjectReference module;
+
         [Inject]
         public IMenuService MenuService { get; set; }
 
@@ -30,27 +32,21 @@ namespace WiredBrainCoffee.Client.Pages
         public List<MenuItem> CoffeeMenuItems { get; set; } = new List<MenuItem>();
         public decimal OrderTotal { get; set; } = 0;
         public decimal SalesTax { get; set; } = 0.06m;
-        private string PromoCode { get; set; } = "";
-        private bool FoodHidden { get; set; } = true;
-        private bool IsValidPromoCode { get; set; } = false;
-        private bool CoffeeHidden { get; set; } = false;
+        public string PromoCode { get; set; } = "";
+        public bool IsValidPromoCode { get; set; } = true;
+        public bool FoodTabHidden { get; set; } = true;
+        public bool CoffeeTabHidden { get; set; } = false;
 
-        public async Task CheckPromoCode()
+        public void ShowCoffee()
         {
-            module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/promocode.js");
-            IsValidPromoCode = await module.InvokeAsync<bool>("CheckPromoCode", PromoCode);
+            CoffeeTabHidden = false;
+            FoodTabHidden = true;
         }
 
-        private void ShowCoffee()
+        public void ShowFood()
         {
-            CoffeeHidden = false;
-            FoodHidden = true;
-        }
-
-        private void ShowFood()
-        {
-            CoffeeHidden = true;
-            FoodHidden = false;
+            CoffeeTabHidden = true;
+            FoodTabHidden = false;
         }
 
         async Task AddExtras(MenuItem item)
@@ -85,13 +81,17 @@ namespace WiredBrainCoffee.Client.Pages
             OrderTotal -= item.Price;
         }
 
-        public void PlaceOrder()
+        public async Task PlaceOrder()
         {
-            NavManager.NavigateTo("order-confirmation");
+            var promoModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/promocode.js");
+            IsValidPromoCode = await promoModule.InvokeAsync<bool>("VerifyPromoCode", PromoCode);
+
+            if (IsValidPromoCode)
+            {
+                NavManager.NavigateTo("order-confirmation");
+            }
         }
 
-
-        IJSObjectReference module;
         protected async override Task OnInitializedAsync()
         {
             var menuItems = await MenuService.GetMenuItems();
